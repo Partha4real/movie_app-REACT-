@@ -35,16 +35,16 @@ class App extends React.Component {
   }
 
   render () {
-    const {movies} = this.props.store.getState();  //{movies: {}, search: {}}
+    const {movies, search} = this.props.store.getState();  //{movies: {}, search: {}}
     const {list,favourites, showFavourites} = movies;  
     console.log('render');
 
     const displayMovies = showFavourites ? favourites : list;
-
-    console.log('STATE', this.props.store.getState())
+    const {dispatch} = this.props.store;
+    console.log('STATE', this.props.store)
     return (
       <div className="App">
-          <Navbar />
+          <Navbar dispatch={dispatch} search={search} /> 
           <div className="main">
             <div className="tabs">
             <div className={`tab ${showFavourites ? '' : 'active-tabs'}`} onClick={() => this.onChangeTab(false)}>Movies</div>  {/*here we are calling instead of passing the function reference as we need to pass the value */}
