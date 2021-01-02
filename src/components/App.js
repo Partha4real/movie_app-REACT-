@@ -19,9 +19,9 @@ class App extends React.Component {
   }
 
   isMovieFavourite = (movie) => {
-    const {favourites} = this.props.store.getState();
+    const {movies} = this.props.store.getState();
 
-    const index = favourites.indexOf(movie);
+    const index = movies.favourites.indexOf(movie);
 
     if (index !== -1) {
       // movie found
@@ -35,7 +35,8 @@ class App extends React.Component {
   }
 
   render () {
-    const {list,favourites, showFavourites} = this.props.store.getState();  //{list:[], favourites: []}
+    const {movies} = this.props.store.getState();  //{movies: {}, search: {}}
+    const {list,favourites, showFavourites} = movies;  
     console.log('render');
 
     const displayMovies = showFavourites ? favourites : list;
@@ -46,7 +47,7 @@ class App extends React.Component {
           <Navbar />
           <div className="main">
             <div className="tabs">
-            <div className={`tab ${showFavourites ? '' : 'active-tabs'}`} onClick={() => this.onChangeTab(false)}>Movies</div>  {/*here we are call instead of passing the function reference as we need to pass the value */}
+            <div className={`tab ${showFavourites ? '' : 'active-tabs'}`} onClick={() => this.onChangeTab(false)}>Movies</div>  {/*here we are calling instead of passing the function reference as we need to pass the value */}
               <div className={`tab ${showFavourites ? 'active-tabs' : ''}`} onClick={() => this.onChangeTab(true)}>Favourites</div>
             </div>
 
